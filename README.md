@@ -3,7 +3,7 @@
 ## Project Summary
 
 This project demonstrates a data-driven approach to forecasting short-term price volatility for the BTC/USD pair. Using time-series market data sourced directly from the Bitfinex API, this analysis employs and compares **Lasso (L1)** and **Ridge (L2)** regularized regression models to identify key predictive signals and build a robust forecasting model. The model achieves a strong **R² of 0.81** on unseen test data, confirming the hypothesis that future volatility is predictable from recent market dynamics.
-
+ ![Volatility Prediction vs Actual](image_folder/final_result_time_series.png)
 ---
 
 ## Key Skills & Technologies
