@@ -48,11 +48,29 @@ From the raw OHLCV data, several predictive features were engineered:
 - **Dynamic Price Features:** `log_return`
 - **Volume Features:** `Volume`, `log_vol`
 
+  <img src="image_folder/multiplot_dark.png" alt="Volatility vs different features" width="800">
+
 EDA revealed classic non-linear relationships (e.g., 'V-shape' for log returns vs. volatility). To linearize these for the regression models, new features were created:
 - `abs_log_return`: Absolute value of the log return.
 - `abs_rsi`: Absolute distance of RSI from its neutral midpoint of 50.
 
-Finally, VIF analysis was used to diagnose and mitigate multicollinearity, leading to a final, robust set of features.
+- Finally, VIF analysis was used to diagnose and mitigate multicollinearity, leading to a final, robust set of features.
+
+   | Feature | VIF |
+   | :--- | :--- |
+   | **Open** | 9.3282e+05 |
+   | **Close** | 1.0939e+06 |
+   | **High** | 1.4719e+08 |
+   | **Low** | 1.4351e+08 |
+   | **Volume** | 1.9067 |
+   | **log_return** | 1.1548 |
+   | **price_range** | 1,797.29 |
+   | **ATR** | 12.3382 |
+   | **RSI** | 24.5807 |
+   | **log_squared** | 4.0574 |
+   | **abs_log_return** | 7.4610 |
+   | **abs_rsi** | 3.2404 |
+   | **log_vol** | 7.0462 |
 
 ### 3. Modeling
 1.  **Data Split:** The data was split **chronologically** into an 80% training set and a 20% test set to simulate real-world forecasting and prevent lookahead bias.
