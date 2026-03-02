@@ -54,23 +54,21 @@ EDA revealed classic non-linear relationships (e.g., 'V-shape' for log returns v
 - `abs_log_return`: Absolute value of the log return.
 - `abs_rsi`: Absolute distance of RSI from its neutral midpoint of 50.
 
-- Finally, VIF analysis was used to diagnose and mitigate multicollinearity, leading to a final, robust set of features.
+-  After removing the raw price features (High, Low, Close) which had VIFs > 10,000, the remaining features show manageable multicollinearity.
 
-   | Feature | VIF |
-   | :--- | :--- |
-   | **Open** | 9.3282e+05 |
-   | **Close** | 1.0939e+06 |
-   | **High** | 1.4719e+08 |
-   | **Low** | 1.4351e+08 |
-   | **Volume** | 1.9067 |
-   | **log_return** | 1.1548 |
-   | **price_range** | 1,797.29 |
-   | **ATR** | 12.3382 |
-   | **RSI** | 24.5807 |
-   | **log_squared** | 4.0574 |
-   | **abs_log_return** | 7.4610 |
-   | **abs_rsi** | 3.2404 |
-   | **log_vol** | 7.0462 |
+| Feature | VIF Score | Interpretation |
+| :--- | :--- | :--- |
+| **log_return** | 1.14 | Excellent (No correlation) |
+| **abs_rsi** | 3.23 | Very Low |
+| **price_range** | 3.98 | Low (Independent signal) |
+| **log_squared** | 4.02 | Low |
+| **log_vol** | 4.91 | Low |
+| **abs_log_return** | 7.38 | Moderate (Acceptable) |
+| **ATR** | 11.58 | High (Lasso handles this) |
+| **RSI** | 23.45 | High (Lasso handles this) |
+| **Open** | 29.48 | High (Raw Price Level) |
+
+*Note: While RSI and ATR show high multicollinearity (VIF > 10), Lasso Regression is specifically designed to handle this by shrinking the coefficients of redundant features to zero.*
 
 ### 3. Modeling
 1.  **Data Split:** The data was split **chronologically** into an 80% training set and a 20% test set to simulate real-world forecasting and prevent lookahead bias.
